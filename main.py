@@ -6,8 +6,8 @@ app = Flask(__name__)
 #mongo = PyMongo(app)
 
 @app.route('/')
-def dashboard():
-    return render_template('dashboard.html')
+def navbar():
+    return render_template('navbar.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
