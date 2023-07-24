@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body>
+    <nav class="sidebar close">
+        <!-- Your existing navbar code here -->
+    </nav>
+
+    <section class="home">
+        <div class="text">Recipes</div>
+        <form action="/recipes" method="get">
+            <input type="text" name="ingredient" placeholder="Enter ingredient">
+            <button type="submit">Search</button>
+        </form>
+        {% if ingredient %}
+            <h2>Search results for "{{ ingredient }}"</h2>
+            <ul>
+                {% for hit in hits %}
+                    <li>
+                        <strong>{{ hit.recipe.label }}</strong><br>
+                        <img src="{{ hit.recipe.image }}" alt="{{ hit.recipe.label }}" width="100"><br>
+                        <a href="{{ hit.recipe.url }}" target="_blank">View Recipe</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+    
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</body>
+</html>
