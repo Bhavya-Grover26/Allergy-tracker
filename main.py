@@ -9,6 +9,18 @@ app.config["DEBUG"] = True
 os.environ['EDAMAM_APP_ID'] = '4ba2acf1'
 os.environ['EDAMAM_APP_KEY'] = '984e714dc4b8dee2ecf753e1b72dec20'
 
+
+url = "https://api.humanapi.co/v1/human/medical/allergies"
+
+headers = {
+    "accept": "application/json",
+    "Authorization": "Bearer <<public_at>>"
+}
+
+response = requests.get(url, headers=headers)
+
+print(response.text)
+
 @app.route('/')
 def navbar():
     return render_template('navbar.html')
