@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipes.css') }}">
 </head>
 <body>
-    <nav class="sidebar close">
-        <!-- Your existing navbar code here -->
-    </nav>
+    {% include 'navbar.html' %}
 
     <section class="home">
         <div class="text">Recipes</div>
@@ -22,9 +21,14 @@
             <ul>
                 {% for hit in hits %}
                     <li>
-                        <strong>{{ hit.recipe.label }}</strong><br>
-                        <img src="{{ hit.recipe.image }}" alt="{{ hit.recipe.label }}" width="100"><br>
-                        <a href="{{ hit.recipe.url }}" target="_blank">View Recipe</a>
+                        <strong>{{ hit.label }}</strong><br>
+                        <img src="{{ hit.image }}" alt="{{ hit.label }}" width="100"><br>
+                        <ul>
+                            {% for item in hit.ingredients_with_allergies %}
+                                <li>{{ item.ingredient }} - {{ item.allergy }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{{ hit.url }}" target="_blank">View Recipe</a>
                     </li>
                 {% endfor %}
             </ul>

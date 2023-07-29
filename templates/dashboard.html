@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your common head content here -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <!-- Your content specific to each page goes here -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Your common script files or other footer content here -->
+</body>
+</html>

@@ -11,10 +11,10 @@
                 href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
                 rel="stylesheet"
             />
-            <title>Dashboard</title>
             <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
         </head>
         <body>
+            <div class="navbar-container">
             <nav class="sidebar close">
                 <header>
                     <div class="image-text">
@@ -34,10 +34,9 @@
                 <div class="menu-bar">
                     <div class="menu">
                         <li class="search-box">
-                            <form action="/recipes" method="get">
                                 <i class="bx bx-search icon"></i>
+                            <form action="/recipes" method="get">
                                 <input type="search" name="ingredient" placeholder="Search" />
-                                <button type="submit">Search</button>
                             </form>
                         </li>
                         
@@ -98,7 +97,8 @@
                     </div>
                 </div>
             </nav>
-            <section class="home"><div class="text">Dashboard</div></section>
+        </div>
+            
             <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
         </body>
     </html>

@@ -1,0 +1,61 @@
+/* Add this CSS for the home section */
+.home {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Style for the recipe items */
+  .recipes-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .recipes-container li {
+    width: calc(33.33% - 10px);
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .recipes-container li img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .recipes-container li strong {
+    display: block;
+    font-size: 18px;
+  }
+  
+  .recipes-container li a {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .recipes-container li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive layout for smaller screens */
+  @media (max-width: 768px) {
+    .recipes-container li {
+      width: calc(50% - 10px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .recipes-container li {
+      width: 100%;
+    }
+  }
+  
