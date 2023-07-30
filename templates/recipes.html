@@ -11,30 +11,36 @@
     {% include 'navbar.html' %}
 
     <section class="home">
-        <div class="text">Recipes</div>
         <form action="/recipes" method="get">
-            <input type="text" name="ingredient" placeholder="Enter ingredient">
-            <button type="submit">Search</button>
+          <input type="text" name="ingredient" placeholder="Enter Food Item">
+          <button type="submit">Search</button>
         </form>
         {% if ingredient %}
-            <h2>Search results for "{{ ingredient }}"</h2>
-            <ul>
-                {% for hit in hits %}
-                    <li>
-                        <strong>{{ hit.label }}</strong><br>
-                        <img src="{{ hit.image }}" alt="{{ hit.label }}" width="100"><br>
-                        <ul>
-                            {% for item in hit.ingredients_with_allergies %}
-                                <li>{{ item.ingredient }} - {{ item.allergy }}</li>
-                            {% endfor %}
-                        </ul>
-                        <a href="{{ hit.url }}" target="_blank">View Recipe</a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <h2>Search results for "{{ ingredient }}"</h2>
+        <table class="recipe-table">
+            <tr>
+              {% for hit in hits %}
+              <td colspan="4">
+                <img src="{{ hit.image }}" alt="{{ hit.label }}" width="200">
+                <div class="recipe-info">
+                  <strong>{{ hit.label }}</strong><br>
+                  <ul class="custom-arrow-list"> <!-- Add the custom CSS class for the list -->
+                    {% for item in hit.ingredients_with_allergies %}
+                    <li>{{ item.ingredient }} - {{ item.allergy }}</li>
+                    {% endfor %}
+                  </ul>
+                  <a href="{{ hit.url }}" target="_blank">View Recipe</a>
+                </div>
+              </td>
+              {% if loop.index is divisibleby 4 %} {# Create new row after every four hits #}
+            </tr>
+            <tr>
+              {% endif %}
+              {% endfor %}
+            </tr>
+          </table>
         {% endif %}
-    </section>
-    
+      </section>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 </body>
 </html>

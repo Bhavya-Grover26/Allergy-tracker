@@ -1,52 +1,160 @@
-/* Add this CSS for the home section */
-.home {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Style for the recipe items */
-  .recipes-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-  }
-  
-  .recipes-container li {
-    box-sizing: border-box;
-    text-align: center;
-  }
-  
-  .recipes-container li img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .recipes-container li strong {
-    display: block;
-    font-size: 18px;
-  }
-  
-  .recipes-container li a {
-    display: block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .recipes-container li a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive layout for smaller screens */
-  @media (max-width: 768px) {
-    .recipes-container ul {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+/* Center and style the search bar */
+.home form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#submitsearch {
+  border: 1px solid rgb(138, 134, 134);
+  margin-left: -82px;
+  padding: 5px;
+  border-radius: 19px;
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 8px;
+  padding-top: 4px;
+  display: none;
+  box-shadow: 0 0 1px black;
+  margin-right: 110px;
+}
+
+#searchInput {
+  width: 18%;
+  border: 1px solid #000;
+  border-radius: 30px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-24.png');
+  background-position: 10px 7px;
+  background-repeat: no-repeat;
+  padding: 8px 20px 8px 40px;
+  -webkit-transition: width 0.8s ease-in-out;
+  transition: width 0.8s ease-in-out;
+  outline: none;
+  opacity: 0.9;
+}
+
+/* Additional styles for the form */
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+form input[type="text"] {
+  width: 300px;
+}
+
+form button {
+  margin-left: 10px;
+  padding: 4px 20px;
+  background-color: #AB7442;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #9B6340;
+}
+
+/* Make the images bigger and square */
+.recipe-table img {
+  width: 200px; /* Increase the image width */
+  height: 200px; /* Set the image height to make it square */
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+/* Table formatting */
+.recipe-table {
+  margin-left: 70px;
+  width: 90%;
+  border-collapse: collapse;
+}
+
+.recipe-table td {
+  padding: 20px;
+  border: 1px solid #ccc;
+  vertical-align: top; /* Align content to the top of the cell */
+  width: 25%
+}
+
+.recipe-info {
+  width: 70%; /* Adjust the width of the text column as needed */
+  margin-top: 20px; /* Add spacing between image and text */
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Make the cell height stretch to accommodate the content */
+}
+
+/* Remove the default bullet points and set the list style to none */
+.recipe-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add a custom arrow before each list item */
+.recipe-info ul li::before {
+  content: "➔ "; /* Use any Unicode arrow character you prefer */
+}
+
+
+/* Additional styling to improve appearance */
+.home .text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.home h2 {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.home a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: var(--blue-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+}
+
+.home a:hover {
+  background-color: darken(var(--blue-color), 5%);
+}
+
+/* Container div for each hit */
+.hit-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hit-container a {
+  margin-bottom: 100px; /* Push "View Recipe" link to the bottom */
+  padding: 8px 16px;
+  background-color: var(--blue-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  position: absolute; /* Set the position to absolute */
+  bottom: 10px; /* Adjust the bottom distance as needed */
+  right: 10px; /* Adjust the right distance as needed */
+}
+
+.hit-container a:hover {
+  background-color: darken(var(--blue-color), 5%);
+}
+

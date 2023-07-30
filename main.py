@@ -95,6 +95,10 @@ def display_linked_list():
 def navbar():
     return render_template('dashboard.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 @app.route('/recipes')
 def search():
     ingredient = request.args.get('ingredient')

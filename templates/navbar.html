@@ -1,42 +1,54 @@
 <body></body>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-<nav class="navbar" id="navbar">
-    <div class="navbar-top">
-      <div class="container">
-        <div class="logo-container">
-          <div class="logo">
-            <img src="https://raw.githubusercontent.com/Smit-Prajapati/QuickNews/main/images/quickNewsLogoMain.svg" alt="Quick News">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/lightbox/css/lightbox.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+      <a href="/" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+          <h2 class="m-0 text-primary">Allergy Tracker</h2>
+      </a>
+      <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-auto p-4 p-lg-0">
+              <a href= "/" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link">Blog</a>
+              <a class="nav-item nav-link">Reminder</a>
+              <a class="nav-item nav-link">Support</a>
+              <div class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                  <div class="dropdown-menu fade-up m-0">
+                      <a class="dropdown-item">Feature</a>
+                      <a class="dropdown-item">Free Quote</a>
+                      <a class="dropdown-item">Our Team</a>
+                      <a class="dropdown-item">Testimonial</a>
+                  </div>
+              </div>
+              <a class="nav-item nav-link">Contact</a>
           </div>
-          <div class="nav-icons">
-            <div class="search-icon" id="search-button-mobile">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div class="menu-icon" id="menu-button">
-              <i class="fa-solid fa-bars"></i>
-            </div>
-          </div>
-          <div class="search-bar" id="search-bar">
-            <input type="text" id="search-text" placeholder="Search Topic">
-            <button id="search">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
-        </div>
+          <a href="/login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Login/Signup<i class="fa fa-arrow-right ms-3"></i></a>
       </div>
-    </div>
-    <div class="navbar-bottom">
-      <div class="container">
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#" class="nav-link active">Dashboard</a></li>
-          <li><a href="#" class="nav-link">Blogs</a></li>
-          <li><a href="#" class="nav-link">Health Tracker</a></li>
-          <li><a href="#" class="nav-link">Medication reminder</a></li>
-          <li><a href="#" class="nav-link">Allergy data</a></li>
-          <li><a href="#" class="nav-link">Login</a></li>
-        </ul>
-      </div>
-    </div>
-    </div>
   </nav>
-<link rel="stylesheet" href="{{ url_for('static', filename='js/navbar.js') }}">
+  <!-- Navbar End -->
+
 </body>

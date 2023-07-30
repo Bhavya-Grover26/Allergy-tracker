@@ -47,7 +47,8 @@
     background: url("https://i.pinimg.com/736x/45/28/47/452847da7f8a7daa28a4cad78e2aa73a.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center 45%;
+    background-position: center 50%;
+    height: 80px;
   }
 
   .logo-container {
@@ -117,6 +118,8 @@
     gap: 30px;
     color: white;
     list-style-type: none;
+    font-size: 20px;
+    margin-top: 40px;
   }
   
   .nav-links li {
