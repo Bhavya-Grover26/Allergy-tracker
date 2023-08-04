@@ -5,6 +5,7 @@ import pandas as pd
 from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
 from py_edamam import PyEdamam 
+from collections import deque
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 
@@ -12,7 +13,7 @@ app = Flask(__name__, static_folder='static')
 app.config["DEBUG"] = True
 
 os.environ['EDAMAM_APP_ID'] = '4ba2acf1'
-os.environ['EDAMAM_APP_KEY'] = '984e714dc4b8dee2ecf753e1b72dec20'
+os.environ['EDAMAM_APP_KEY'] = '345f58077c89160ac3c67e636bbda828'
 
 url = "https://api.humanapi.co/v1/human/medical/allergies"
 
@@ -71,6 +72,34 @@ def load_linked_list_from_file(file_name):
     with open(file_name, 'rb') as file:
         linked_list = pickle.load(file)
     return linked_list
+
+class SymptomNode:
+    def __init__(self, symptom, food):
+        self.symptom = symptom
+        self.food = food
+        self.next = None
+
+class SymptomLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def add_node(self, symptom, food):
+        new_node = SymptomNode(symptom, food)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+    
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current
+            current = current.next
+
+
 
 @app.route('/index')
 def display_linked_list():
@@ -170,11 +199,11 @@ def edamam_search(query):
            f"&app_key={app_key}"
 
     response = requests.get(curl)
+    recipes_with_allergies = []
     if response.status_code == 200:
         data = response.json()
         hits = data.get('hits', [])
         # Extract the list of ingredients for each recipe
-        recipes_with_allergies = []
         linked_list = load_linked_list_from_file('linked_list_data.pickle')
         for hit in hits:
             recipe = hit.get('recipe', {})
@@ -195,9 +224,31 @@ def edamam_search(query):
 
     return recipes_with_allergies
 
-@app.route('/allergy')
-def allergy():
-    return data.head().to_string()
+@app.route('/symptom', methods=['GET', 'POST'])
+def select_symptom():
+    symptom_list = SymptomLinkedList()
+
+    # Read CSV file using pandas
+    df = pd.read_csv('FoodSymptoms.csv')
+
+    # Iterate through the DataFrame and add nodes to the linked list
+    for index, row in df.iterrows():
+        symptom = row['Symptom']
+        food = row['Allergy']
+        symptom_list.add_node(symptom, food)
+
+    selected_foods = []
+
+    if request.method == 'POST':
+        selected_symptoms = request.form.getlist('symptom')
+        current = symptom_list.head
+        while current:
+            if current.symptom in selected_symptoms:
+                selected_foods.append(current.food)
+            current = current.next
+
+    return render_template('symptom_checker.html', symptom_list=symptom_list, selected_foods=selected_foods)
+
 
 if __name__ == '__main__':
     csv_file = 'FoodData.csv'
