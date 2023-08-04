@@ -15,17 +15,17 @@
         </div>
     </div>
     
-    <form method="POST" action="/symptom">
+    <form id="symptom-form" method="POST" action="/symptom">
         <div class="symptom">
-        <div class="cards-container">
-            {% for node in symptom_list %}
-            <div class="card-symptom">
-                <label>
-                    <input type="checkbox" name="symptom" value="{{ node.symptom }}"> {{ node.symptom }}
-                </label>
+            <div class="cards-container">
+                {% for node in symptom_list %}
+                <div class="card-symptom">
+                    <label>
+                        <input type="checkbox" name="symptom" value="{{ node.symptom }}"> {{ node.symptom }}
+                    </label>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
         </div>
         <button type="submit" class="large-button">Submit</button>
     </form>
@@ -38,5 +38,7 @@
         {% endfor %}
     </ul>
     {% endif %}
+
+    
 </body>
 </html>

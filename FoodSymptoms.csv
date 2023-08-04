@@ -1,105 +1,105 @@
-﻿Symptom,Allergy
-Rash,Peanuts
-Itching,Peanuts
-Hives,Peanuts
-Stomach Pain,Shellfish
-Nausea,Shellfish
-Vomiting,Shellfish
-Runny Nose,Pollen
-Sneezing,Pollen
-Itchy Eyes,Pollen
-Diarrhea,Dairy
-Abdominal Cramps,Dairy
-Bloating,Dairy
-Swelling,Eggs
-Shortness of Breath,Eggs
-Difficulty Swallowing,Peanuts
-Headache,MSG
-Dizziness,MSG
-Heartburn,Spicy Foods
-Watery Eyes,Allergens in Air
-Difficulty Breathing,Allergens in Air
-Coughing,Allergens in Air
-Fatigue,Gluten
-Joint Pain,Gluten
-Skin Eruptions,Gluten
-Tingling Lips,Shellfish
-Redness,Shellfish
-Sore Throat,Citrus Fruits
-Wheezing,Milk
-Chest Tightness,Milk
-Pale Skin,Anemia
-Fainting,Nut Allergy
-Swelling of Lips,Nut Allergy
-Vomiting Blood,Peptic Ulcer
-Irregular Heartbeat,Caffeine
-Confusion,Alcohol
-Blurred Vision,Diabetes
-Mood Swings,Caffeine
-Muscle Cramps,Electrolyte Imbalance
-Blood in Stool,Ulcerative Colitis
-Hair Loss,Zinc Deficiency
-Dry Skin,Dairy
-Fever,Infection
-Weight Loss,Hyperthyroidism
-Constipation,Low Fiber Intake
-Excessive Thirst,Diabetes
-Numbness,Vitamin Deficiency
-Rapid Heartbeat,Caffeine
-Acne,Dairy
-Bad Breath,Poor Oral Hygiene
-Joint Swelling,Rheumatoid Arthritis
-Itchy Skin,Dairy
-Red or Inflamed Skin,Eggs
-Dry Skin,Gluten
-Rash,Nuts
-Flare-ups,Shellfish
-Swelling,Soy
-Irritated Skin,Tomatoes
-Sensitive Skin,Citrus Fruits
-Blisters,Spicy Foods
-Oozing or Crusting,Processed Foods
-Discoloration,Artificial Food Additives
-Skin Thickening,Gluten
-Cracked Skin,Dairy
-Scaly Skin,Wheat
-Burning Sensation,Coffee
-Intense Itching,Alcohol
-Painful Skin,"Nightshades (e.g., Eggplant)"
-Puffy Skin,Sugary Foods
-Sleep Disturbances,Caffeine
-Skin Infections,Sugar
-Allergic Reaction,Food Colorings
-Irritation After Eating,Dairy
-Rashes After Meals,Seafood
-Flare-ups with Certain Foods,Spices
-Skin Discomfort,Artificial Sweeteners
-Swollen Eyes,Food Allergies
-Ear Inflammation,Dairy
-Nose Congestion,Gluten
-Irritated Throat,Acidic Foods
-Irritated Eyes,High Histamine Foods
-Irritated Scalp,Dairy
-Facial Redness,Hot or Spicy Foods
-Skin Allergies,Eggs
-Pruritus (Itching),Nuts
-Skin Discoloration,"Nightshades (e.g., Bell Peppers)"
-Excessive Sweating,Processed Meats
-Hair Loss,Sugar
-Eye Irritation,Dairy
-Joint Pain,Gluten
-Swelling in Joints,Eggs
-Fatigue,Food Sensitivities
-Mood Swings,Food Additives
-Digestive Issues,Food Allergies
-Bloating,Wheat
-Skin Inflammation,Artificial Food Colorings
-Inflammatory Skin,Processed Snacks
-Redness,Spicy Foods
-Skin Discomfort,Dairy
-Skin Sensitivity,Nuts
-Skin Rashes,Food Sensitivities
-Irritated Skin,High-Sugar Foods
-Skin Itching,Gluten
-Skin Dryness,Dairy
-Skin Eruptions,Processed Foods
+﻿Symptom,Allergy,Image
+Rash,Peanuts,
+Itching,Peanuts,
+Hives,Peanuts,
+Stomach Pain,Shellfish,
+Nausea,Shellfish,
+Vomiting,Shellfish,
+Runny Nose,Pollen,
+Sneezing,Pollen,
+Itchy Eyes,Pollen,
+Diarrhea,Dairy,
+Abdominal Cramps,Dairy,
+Bloating,Dairy,
+Swelling,Eggs,
+Shortness of Breath,Eggs,
+Difficulty Swallowing,Peanuts,
+Headache,MSG,
+Dizziness,MSG,
+Heartburn,Spicy Foods,
+Watery Eyes,Allergens in Air,
+Difficulty Breathing,Allergens in Air,
+Coughing,Allergens in Air,
+Fatigue,Gluten,
+Joint Pain,Gluten,
+Skin Eruptions,Gluten,
+Tingling Lips,Shellfish,
+Redness,Shellfish,
+Sore Throat,Citrus Fruits,
+Wheezing,Milk,
+Chest Tightness,Milk,
+Pale Skin,Anemia,
+Fainting,Nut Allergy,
+Swelling of Lips,Nut Allergy,
+Vomiting Blood,Peptic Ulcer,
+Irregular Heartbeat,Caffeine,
+Confusion,Alcohol,
+Blurred Vision,Diabetes,
+Mood Swings,Caffeine,
+Muscle Cramps,Electrolyte Imbalance,
+Blood in Stool,Ulcerative Colitis,
+Hair Loss,Zinc Deficiency,
+Dry Skin,Dairy,
+Fever,Infection,
+Weight Loss,Hyperthyroidism,
+Constipation,Low Fiber Intake,
+Excessive Thirst,Diabetes,
+Numbness,Vitamin Deficiency,
+Rapid Heartbeat,Caffeine,
+Acne,Dairy,
+Bad Breath,Poor Oral Hygiene,
+Joint Swelling,Rheumatoid Arthritis,
+Itchy Skin,Dairy,
+Red or Inflamed Skin,Eggs,
+Dry Skin,Gluten,
+Rash,Nuts,
+Flare-ups,Shellfish,
+Swelling,Soy,
+Irritated Skin,Tomatoes,
+Sensitive Skin,Citrus Fruits,
+Blisters,Spicy Foods,
+Oozing or Crusting,Processed Foods,
+Discoloration,Artificial Food Additives,
+Skin Thickening,Gluten,
+Cracked Skin,Dairy,
+Scaly Skin,Wheat,
+Burning Sensation,Coffee,
+Intense Itching,Alcohol,
+Painful Skin,"Nightshades (e.g., Eggplant)",
+Puffy Skin,Sugary Foods,
+Sleep Disturbances,Caffeine,
+Skin Infections,Sugar,
+Allergic Reaction,Food Colorings,
+Irritation After Eating,Dairy,
+Rashes After Meals,Seafood,
+Flare-ups with Certain Foods,Spices,
+Skin Discomfort,Artificial Sweeteners,
+Swollen Eyes,Food Allergies,
+Ear Inflammation,Dairy,
+Nose Congestion,Gluten,
+Irritated Throat,Acidic Foods,
+Irritated Eyes,High Histamine Foods,
+Irritated Scalp,Dairy,
+Facial Redness,Hot or Spicy Foods,
+Skin Allergies,Eggs,
+Pruritus (Itching),Nuts,
+Skin Discoloration,"Nightshades (e.g., Bell Peppers)",
+Excessive Sweating,Processed Meats,
+Hair Loss,Sugar,
+Eye Irritation,Dairy,
+Joint Pain,Gluten,
+Swelling in Joints,Eggs,
+Fatigue,Food Sensitivities,
+Mood Swings,Food Additives,
+Digestive Issues,Food Allergies,
+Bloating,Wheat,
+Skin Inflammation,Artificial Food Colorings,
+Inflammatory Skin,Processed Snacks,
+Redness,Spicy Foods,
+Skin Discomfort,Dairy,
+Skin Sensitivity,Nuts,
+Skin Rashes,Food Sensitivities,
+Irritated Skin,High-Sugar Foods,
+Skin Itching,Gluten,
+Skin Dryness,Dairy,
+Skin Eruptions,Processed Foods,

@@ -33,6 +33,7 @@ class Node:
     def __init__(self, food, allergy):
         self.food = food
         self.allergy = allergy
+
         self.next = None
 
 # Define the LinkedList class
@@ -74,17 +75,18 @@ def load_linked_list_from_file(file_name):
     return linked_list
 
 class SymptomNode:
-    def __init__(self, symptom, food):
+    def __init__(self, symptom, food, image):
         self.symptom = symptom
         self.food = food
+        self.image=image
         self.next = None
 
 class SymptomLinkedList:
     def __init__(self):
         self.head = None
 
-    def add_node(self, symptom, food):
-        new_node = SymptomNode(symptom, food)
+    def add_node(self, symptom, food, image):
+        new_node = SymptomNode(symptom, food, image)
         if not self.head:
             self.head = new_node
             return
@@ -235,7 +237,8 @@ def select_symptom():
     for index, row in df.iterrows():
         symptom = row['Symptom']
         food = row['Allergy']
-        symptom_list.add_node(symptom, food)
+        image= row['Image']
+        symptom_list.add_node(symptom, food, image)
 
     selected_foods = []
 
