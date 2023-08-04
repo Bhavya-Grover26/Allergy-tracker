@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom List</title>
+</head>
+<body>
+    <h1>Symptom List</h1>
+    <form method="POST" action="/symptom">
+        <fieldset>
+            <legend>Select Symptoms:</legend>
+            {% for node in symptom_list %}
+            <label>
+                <input type="checkbox" name="symptom" value="{{ node.symptom }}"> {{ node.symptom }}
+            </label><br>
+            {% endfor %}
+        </fieldset>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if selected_foods %}
+    <h2>Associated Food Allergies:</h2>
+    <ul>
+        {% for food in selected_foods %}
+        <li>{{ food }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

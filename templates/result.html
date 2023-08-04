@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom Checker Result</title>
+</head>
+<body>
+    <h1>Potential Food Allergies</h1>
+    <p>Based on the selected symptoms, you might have the following allergies:</p>
+    <ul>
+        {% for allergy in allergies %}
+            <li>{{ allergy }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
