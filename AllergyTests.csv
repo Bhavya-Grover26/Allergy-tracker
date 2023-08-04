@@ -1,0 +1,18 @@
+﻿TestName,Description,FoodsDetected
+IgE Blood Test,Measures the level of immunoglobulin E (IgE) antibodies in the blood in response to specific allergens,"Peanuts, Eggs, Milk, Soy, Wheat"
+Skin Prick Test,Involves applying a small amount of allergen extract to the skin and observing for allergic reactions,Various allergens
+Oral Food Challenge,Involves consuming small amounts of the suspected allergen under medical supervision to observe for allergic reactions,Specific allergen challenged
+Component-Resolved Diagnosis (CRD),"Tests for specific allergen components, providing more detailed information about sensitization",Specific components of allergens
+Elimination Diet,Involves removing suspected allergens from the diet and monitoring for symptom improvement,Based on diet restriction
+Patch Test,Tests for contact allergies by applying potential allergens to the skin under adhesive patches,Non-food allergens
+RAST Test (Radioallergosorbent Test),Measures specific IgE antibodies to allergens in the blood,"Specific allergens, e.g., peanuts, milk"
+Atopy Patch Test,Involves applying allergen patches to the skin for an extended period to detect delayed-type allergies,Multiple allergens
+Food-Specific IgG Blood Test,Measures the level of immunoglobulin G (IgG) antibodies in the blood in response to specific foods,Various foods
+Basophil Activation Test (BAT),"Measures the activation of basophils in response to allergens, indicating allergic sensitization",Multiple allergens
+Histamine Release Test (HRT),Measures the release of histamine from basophils in response to allergens,Multiple allergens
+Comprehensive Allergy Blood Panel,"Tests for a broad range of allergens, including environmental allergens and food allergens",Multiple allergens
+Adverse Reaction to Food Test,"Identifies adverse reactions to foods, which may not involve the immune system (non-IgE-mediated)",Various foods
+Provocation and Neutralization Testing,Involves injecting minute quantities of allergens to determine if they trigger symptoms,Specific allergens
+Delayed Hypersensitivity Skin Test,Assesses delayed-type allergic reactions by injecting allergens under the skin and observing for responses,Multiple allergens
+Atopy Patch Test,Detects delayed allergic reactions by applying allergens on patches to the skin,Various allergens
+Multiple Allergen Simultaneous Test (MAST),Tests for various allergens at once to identify sensitivities or allergies,Multiple allergens
