@@ -2,9 +2,11 @@ import os
 import requests
 import pickle
 import pandas as pd
-from flask import Flask, render_template, request , jsonify
+from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
 from py_edamam import PyEdamam 
+from flask_pymongo import PyMongo
+from pymongo import MongoClient
 
 app = Flask(__name__, static_folder='static')
 app.config["DEBUG"] = True
@@ -23,7 +25,7 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
-data = pd.read_csv('C:/Bhavya/Projects/Allergy Tracker/FoodData.csv')
+data = pd.read_csv("FoodData.csv")
 
 # Define the Node class for the linked list
 class Node:
@@ -95,9 +97,59 @@ def display_linked_list():
 def navbar():
     return render_template('dashboard.html')
 
-@app.route('/login')
+app.config ["SECRET_KEY"] = "56f7c18ca74b1712ba94242c40ccef435d1fa4ac"
+app.config["MONGO_URI"] = "mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/Allergy-tracker?retryWrites=true&w=majority"
+
+mongo = PyMongo()
+mongo = PyMongo(app)
+
+client = MongoClient('mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/?retryWrites=true&w=majority')
+db = client["Allergy-tracker"]
+collection = db["Allergy-tracker"]
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user_data = {
+        'username': username,
+        'email': email,
+        'password': password
+    }
+
+    # Insert user data into MongoDB
+    collection = mongo.db.users
+    collection.insert_one(user_data)
+
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user_data = {
+            'username': username,
+            'password': password
+        }
+
+        # Check user credentials against MongoDB
+        collection = mongo.db.users
+        user = collection.find_one(user_data)
+
+        if user:
+            session['username'] = user['username']
+            return redirect(url_for('navbar'))  # Redirect to dashboard route
+        else:
+            error_message = "Invalid credentials. Please try again."
+            return render_template('login.html', error_message=error_message)
+
+    return render_template('login.html')  # For GET requests
+
 
 @app.route('/recipes')
 def search():
@@ -151,5 +203,16 @@ if __name__ == '__main__':
     csv_file = 'FoodData.csv'
     linked_list = read_csv_and_create_linked_list(csv_file)
     save_linked_list_to_file(linked_list, 'linked_list_data.pickle')
+
+    # Initialize MongoDB connection
+    mongo = PyMongo()
+    mongo.init_app(app)
+
     app.run()
+
+
+
+
+
+
 
