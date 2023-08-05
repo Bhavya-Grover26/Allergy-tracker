@@ -1,16 +1,42 @@
+from __future__ import print_function
 import os
 import requests
 import pickle
 import pandas as pd
-from flask import Flask, render_template, request , jsonify
+from flask import Flask, render_template, request , jsonify,session,redirect
 from jinja2 import Template
 from py_edamam import PyEdamam 
+
+
+import datetime
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+
+redirect_uri = 'http://localhost:5000/callback'
+flow = Flow.from_client_secrets_file(
+    'client_secret.json',  # Path to your OAuth 2.0 credentials JSON file
+    scopes=['https://www.googleapis.com/auth/calendar.readonly'],
+    redirect_uri= redirect_uri # Update with your redirect URI
+)
+
 
 app = Flask(__name__, static_folder='static')
 app.config["DEBUG"] = True
 
+app.secret_key = "F3ABD4FFCCDEE8755852EC5F3E577"
+
 os.environ['EDAMAM_APP_ID'] = '4ba2acf1'
-os.environ['EDAMAM_APP_KEY'] = '984e714dc4b8dee2ecf753e1b72dec20'
+os.environ['EDAMAM_APP_KEY'] = '345f58077c89160ac3c67e636bbda828'
 
 url = "https://api.humanapi.co/v1/human/medical/allergies"
 
@@ -23,7 +49,7 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
-data = pd.read_csv('C:/Bhavya/Projects/Allergy Tracker/FoodData.csv')
+data = pd.read_csv('C:\Vrudhi\Women Hackathon\Allergy-tracker\FoodData.csv')
 
 # Define the Node class for the linked list
 class Node:
@@ -69,6 +95,19 @@ def load_linked_list_from_file(file_name):
     with open(file_name, 'rb') as file:
         linked_list = pickle.load(file)
     return linked_list
+
+@app.route('/calendar')
+def index():
+    authorization_url, state = flow.authorization_url()
+    session['state'] = state
+    return redirect(authorization_url)
+
+
+@app.route('/callback')
+def callback():
+    return render_template('calendar.html')
+
+    
 
 @app.route('/index')
 def display_linked_list():
@@ -146,6 +185,10 @@ def edamam_search(query):
 @app.route('/allergy')
 def allergy():
     return data.head().to_string()
+
+@app.route('/caldash.html')
+def caldash():
+    return render_template('caldash.html')
 
 if __name__ == '__main__':
     csv_file = 'FoodData.csv'
