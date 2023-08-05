@@ -1,17 +1,45 @@
+from __future__ import print_function
 import os
 import requests
 import pickle
+import csv
 import pandas as pd
 from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
 from py_edamam import PyEdamam 
+
 from collections import deque
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 import csv
 
+
+import datetime
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+
+redirect_uri = 'http://localhost:5000/callback'
+flow = Flow.from_client_secrets_file(
+    'client_secret.json',  # Path to your OAuth 2.0 credentials JSON file
+    scopes=['https://www.googleapis.com/auth/calendar.readonly'],
+    redirect_uri= redirect_uri # Update with your redirect URI
+)
+
+
 app = Flask(__name__, static_folder='static')
 app.config["DEBUG"] = True
+
+app.secret_key = "F3ABD4FFCCDEE8755852EC5F3E577"
 
 os.environ['EDAMAM_APP_ID'] = '4ba2acf1'
 os.environ['EDAMAM_APP_KEY'] = '345f58077c89160ac3c67e636bbda828'
@@ -27,13 +55,17 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
+
+
 data = pd.read_csv("FoodData.csv")
+
 
 # Define the Node class for the linked list
 class Node:
     def __init__(self, food, allergy):
         self.food = food
         self.allergy = allergy
+
         self.next = None
 
 # Define the LinkedList class
@@ -75,17 +107,18 @@ def load_linked_list_from_file(file_name):
     return linked_list
 
 class SymptomNode:
-    def __init__(self, symptom, food):
+    def __init__(self, symptom, food, image):
         self.symptom = symptom
         self.food = food
+        self.image=image
         self.next = None
 
 class SymptomLinkedList:
     def __init__(self):
         self.head = None
 
-    def add_node(self, symptom, food):
-        new_node = SymptomNode(symptom, food)
+    def add_node(self, symptom, food, image):
+        new_node = SymptomNode(symptom, food, image)
         if not self.head:
             self.head = new_node
             return
@@ -120,6 +153,17 @@ def display_linked_list():
 
     return render_template('index.html', table_html=table_html)
 
+
+@app.route('/calendar')
+def index():
+    authorization_url, state = flow.authorization_url()
+    session['state'] = state
+    return redirect(authorization_url)
+
+
+@app.route('/callback')
+def callback():
+    return render_template('calendar.html')
 
 @app.route('/')
 def navbar():
@@ -160,6 +204,14 @@ def login():
     return render_template('login.html')  # For GET requests
 
 
+@app.route('/tracker')
+def tracker():
+    return render_template('tracker.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 @app.route('/recipes')
 def search():
     ingredient = request.args.get('ingredient')
@@ -168,6 +220,10 @@ def search():
     hits = edamam_search(ingredient)
 
     return render_template('recipes.html', ingredient=ingredient, hits=hits)
+
+@app.route('/awareness')
+def awareness():
+    return render_template('awareness.html')
 
 def edamam_search(query):
     # Access the Edamam App ID and App Key from the environment variables
@@ -179,11 +235,13 @@ def edamam_search(query):
            f"&app_key={app_key}"
 
     response = requests.get(curl)
+
     recipes_with_allergies = []
     if response.status_code == 200:
         data = response.json()
         hits = data.get('hits', [])
         # Extract the list of ingredients for each recipe
+
         linked_list = load_linked_list_from_file('linked_list_data.pickle')
         for hit in hits:
             recipe = hit.get('recipe', {})
@@ -215,7 +273,8 @@ def select_symptom():
     for index, row in df.iterrows():
         symptom = row['Symptom']
         food = row['Allergy']
-        symptom_list.add_node(symptom, food)
+        image= row['Image']
+        symptom_list.add_node(symptom, food, image)
 
     selected_foods = []
 
@@ -230,10 +289,83 @@ def select_symptom():
     return render_template('symptom_checker.html', symptom_list=symptom_list, selected_foods=selected_foods)
 
 
+
+import csv
+
+class DoctorNode:
+    def __init__(self, name, address, state, email):
+        self.name = name
+        self.address = address
+        self.state = state
+        self.email = email
+        self.next = None
+
+def read_csv_to_linked_list(file_path):
+    head = None
+    tail = None
+    
+    with open(file_path, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        
+        for row in reader:
+            name = row['Name']
+            address = row['Address']
+            state = row['State']
+            email = row['Email ID']
+            
+            new_node = DoctorNode(name, address, state, email)
+            
+            if head is None:
+                head = new_node
+                tail = new_node
+            else:
+                tail.next = new_node
+                tail = new_node
+                
+    return head
+
+def main():
+    file_path = 'doctors.csv'  # Replace with the actual path to your CSV file
+    head = read_csv_to_linked_list(file_path)
+    
+    current = head
+    while current is not None:
+        print("Name:", current.name)
+        print("Address:", current.address)
+        print("State:", current.state)
+        print("Email:", current.email)
+        print("--------------------")
+        current = current.next
+    
+file_path = 'Doctors.csv'  # Replace with the actual path to your CSV file
+head = read_csv_to_linked_list(file_path)
+
+@app.route('/doctor', methods=['GET', 'POST'])
+def doctor():
+    if request.method == 'POST':
+        state = request.form['state']
+        doctors = []
+        
+        current = head
+        while current is not None:
+            if current.state == state:
+                doctors.append(current)
+            current = current.next
+        
+        return render_template('doctor.html', doctors=doctors, state=state)
+    
+    return render_template('doctor.html', doctors=None, state=None)
+
+
+
 if __name__ == '__main__':
     csv_file = 'FoodData.csv'
     linked_list = read_csv_and_create_linked_list(csv_file)
     save_linked_list_to_file(linked_list, 'linked_list_data.pickle')
+
+
+# Now you can use the loaded_list as needed
+
 
     # Initialize MongoDB connection
     mongo = PyMongo()

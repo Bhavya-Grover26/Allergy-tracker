@@ -1,0 +1,58 @@
+h1 {
+    font-size: 75px;
+    text-align: center;
+    margin:  25px 0px;
+}
+
+p {
+    font-size: 25px;
+    text-align: center;
+}
+
+html {
+    background-image: url(https://cdn.pixabay.com/photo/2012/03/01/15/54/coffee-20486_1280.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#container {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    color: white;
+}
+
+#survey-form {
+    text-align: center;
+    color: white;
+    background: rgb(122, 105, 81, 0.8);
+    width: 600px;
+    padding: 25px 50px;
+    border-radius: 25px;
+    margin: auto;
+}
+
+#name, #email, #number {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+#name-label, #email-label, #number-label {
+    font-size: 25px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#dropdown {
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.questions {
+    margin: 20px 0px 5px 0px;
+    padding: 5px;
+}
+
+#comments {
+    width: 300px;
+    height: 60px;
+}
