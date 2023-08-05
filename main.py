@@ -7,6 +7,7 @@ import pandas as pd
 from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
 from py_edamam import PyEdamam 
+
 from collections import deque
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
@@ -53,7 +54,10 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
+
+
 data = pd.read_csv("FoodData.csv")
+
 
 # Define the Node class for the linked list
 class Node:
@@ -221,6 +225,14 @@ def login():
     return render_template('login.html')  # For GET requests
 
 
+@app.route('/tracker')
+def tracker():
+    return render_template('tracker.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 @app.route('/recipes')
 def search():
     ingredient = request.args.get('ingredient')
@@ -240,11 +252,13 @@ def edamam_search(query):
            f"&app_key={app_key}"
 
     response = requests.get(curl)
+
     recipes_with_allergies = []
     if response.status_code == 200:
         data = response.json()
         hits = data.get('hits', [])
         # Extract the list of ingredients for each recipe
+
         linked_list = load_linked_list_from_file('linked_list_data.pickle')
         for hit in hits:
             recipe = hit.get('recipe', {})
