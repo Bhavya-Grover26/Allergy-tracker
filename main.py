@@ -3,9 +3,12 @@ import os
 import requests
 import pickle
 import pandas as pd
-from flask import Flask, render_template, request , jsonify,session,redirect
+from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
 from py_edamam import PyEdamam 
+from collections import deque
+from flask_pymongo import PyMongo
+from pymongo import MongoClient
 
 
 import datetime
@@ -49,13 +52,14 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
-data = pd.read_csv('C:\Vrudhi\Women Hackathon\Allergy-tracker\FoodData.csv')
+data = pd.read_csv("FoodData.csv")
 
 # Define the Node class for the linked list
 class Node:
     def __init__(self, food, allergy):
         self.food = food
         self.allergy = allergy
+
         self.next = None
 
 # Define the LinkedList class
@@ -96,18 +100,35 @@ def load_linked_list_from_file(file_name):
         linked_list = pickle.load(file)
     return linked_list
 
-@app.route('/calendar')
-def index():
-    authorization_url, state = flow.authorization_url()
-    session['state'] = state
-    return redirect(authorization_url)
+class SymptomNode:
+    def __init__(self, symptom, food, image):
+        self.symptom = symptom
+        self.food = food
+        self.image=image
+        self.next = None
 
+class SymptomLinkedList:
+    def __init__(self):
+        self.head = None
 
-@app.route('/callback')
-def callback():
-    return render_template('calendar.html')
-
+    def add_node(self, symptom, food, image):
+        new_node = SymptomNode(symptom, food, image)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
     
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current
+            current = current.next
+
+
+
 
 @app.route('/index')
 def display_linked_list():
@@ -130,13 +151,74 @@ def display_linked_list():
     return render_template('index.html', table_html=table_html)
 
 
+@app.route('/calendar')
+def index():
+    authorization_url, state = flow.authorization_url()
+    session['state'] = state
+    return redirect(authorization_url)
+
+
+@app.route('/callback')
+def callback():
+    return render_template('calendar.html')
+
 @app.route('/')
 def navbar():
     return render_template('dashboard.html')
 
-@app.route('/login')
+app.config ["SECRET_KEY"] = "56f7c18ca74b1712ba94242c40ccef435d1fa4ac"
+app.config["MONGO_URI"] = "mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/Allergy-tracker?retryWrites=true&w=majority"
+
+mongo = PyMongo()
+mongo = PyMongo(app)
+
+client = MongoClient('mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/?retryWrites=true&w=majority')
+db = client["Allergy-tracker"]
+collection = db["Allergy-tracker"]
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user_data = {
+        'username': username,
+        'email': email,
+        'password': password
+    }
+
+    # Insert user data into MongoDB
+    collection = mongo.db.users
+    collection.insert_one(user_data)
+
+    return render_template('signup.html')
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user_data = {
+            'username': username,
+            'password': password
+        }
+
+        # Check user credentials against MongoDB
+        collection = mongo.db.users
+        user = collection.find_one(user_data)
+
+        if user:
+            session['username'] = user['username']
+            return redirect(url_for('navbar'))  # Redirect to dashboard route
+        else:
+            error_message = "Invalid credentials. Please try again."
+            return render_template('login.html', error_message=error_message)
+
+    return render_template('login.html')  # For GET requests
+
 
 @app.route('/recipes')
 def search():
@@ -157,11 +239,11 @@ def edamam_search(query):
            f"&app_key={app_key}"
 
     response = requests.get(curl)
+    recipes_with_allergies = []
     if response.status_code == 200:
         data = response.json()
         hits = data.get('hits', [])
         # Extract the list of ingredients for each recipe
-        recipes_with_allergies = []
         linked_list = load_linked_list_from_file('linked_list_data.pickle')
         for hit in hits:
             recipe = hit.get('recipe', {})
@@ -182,9 +264,32 @@ def edamam_search(query):
 
     return recipes_with_allergies
 
-@app.route('/allergy')
-def allergy():
-    return data.head().to_string()
+@app.route('/symptom', methods=['GET', 'POST'])
+def select_symptom():
+    symptom_list = SymptomLinkedList()
+
+    # Read CSV file using pandas
+    df = pd.read_csv('FoodSymptoms.csv')
+
+    # Iterate through the DataFrame and add nodes to the linked list
+    for index, row in df.iterrows():
+        symptom = row['Symptom']
+        food = row['Allergy']
+        image= row['Image']
+        symptom_list.add_node(symptom, food, image)
+
+    selected_foods = []
+
+    if request.method == 'POST':
+        selected_symptoms = request.form.getlist('symptom')
+        current = symptom_list.head
+        while current:
+            if current.symptom in selected_symptoms:
+                selected_foods.append(current.food)
+            current = current.next
+
+    return render_template('symptom_checker.html', symptom_list=symptom_list, selected_foods=selected_foods)
+
 
 @app.route('/caldash.html')
 def caldash():
@@ -194,5 +299,16 @@ if __name__ == '__main__':
     csv_file = 'FoodData.csv'
     linked_list = read_csv_and_create_linked_list(csv_file)
     save_linked_list_to_file(linked_list, 'linked_list_data.pickle')
+
+    # Initialize MongoDB connection
+    mongo = PyMongo()
+    mongo.init_app(app)
+
     app.run()
+
+
+
+
+
+
 

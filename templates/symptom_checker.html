@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/symptom_checker.css') }}">
+    {% include 'navbar.html' %}
+</head>
+<body-symptom>
+    <div class="container-text">
+        <div class="image-left">
+            <img class="img-fluid-text" src="https://img.freepik.com/premium-vector/doctor-is-giving-medical-procedure_167995-1061.jpg?w=2000" alt="Image">
+        </div>
+        <div class="text-symptom">
+            "Explore and select your symptoms from our comprehensive list to better understand potential food allergies."
+        </div>
+    </div>
+    
+    <form id="symptom-form" method="POST" action="/symptom">
+        <div class="symptom">
+            <div class="cards-container">
+                {% for node in symptom_list %}
+                <div class="card-symptom">
+                    <label>
+                        <input type="checkbox" name="symptom" value="{{ node.symptom }}"> {{ node.symptom }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="large-button">Submit</button>
+    </form>
+
+    {% if selected_foods %}
+    <h2>Associated Food Allergies:</h2>
+    <ul>
+        {% for food in selected_foods %}
+        <li>{{ food }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    
+</body>
+</html>
