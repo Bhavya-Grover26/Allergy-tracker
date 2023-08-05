@@ -1,0 +1,303 @@
+/*
+	Theme Colors...
+	Light Color: B8E6FF
+	Medium Light: 9FDDFF
+	Medium dark: 7FD2FF
+	Dark color: 2C7EAA
+
+	Event colors...
+	Default: rgba(0, 153, 153, .4)
+	Appointment: rgba(255, 0, 0, .4)
+	Meeting: rgba(255, 116, 0, .4)
+	Business: rgba(0, 204, 0, .4)
+*/
+
+.CalendarJS {
+    margin: 0;
+    padding: 0;
+    /*	position: relative;*/
+  }
+  
+  .cjs-calHeader {
+    width: 100%;
+    color: #2c7eaa;
+    margin: 0;
+    padding: 0 0 2px 0 !important;
+  }
+  
+  .cjs-right {
+    border-right: 1px solid #7fd2ff;
+    box-sizing: border-box;
+  }
+  
+  .cjs-top {
+    border-top: 1px solid #7fd2ff;
+    box-sizing: border-box;
+  }
+  
+  .cjs-left {
+    border-left: 1px solid #7fd2ff;
+    box-sizing: border-box;
+  }
+  
+  .cjs-bottom {
+    border-bottom: 1px solid #7fd2ff;
+    box-sizing: border-box;
+  }
+  
+  .cjs-top-left {
+    border-top-left-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .cjs-top-right {
+    border-top-right-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .cjs-bottom-left {
+    border-bottom-left-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .cjs-bottom-right {
+    border-bottom-right-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  .cjs-hidden {
+    display: none !important;
+  }
+  
+  .cjs-dayCol {
+    float: left;
+    position: relative;
+    width: calc(100% / 7);
+    padding: 0% 0% calc(100% / 7) 0%; /* = width for a 1:1 aspect ratio */
+    margin: 0;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    background-color: #b8e6ff;
+    text-align: left;
+  }
+  
+  .cjs-dayContent {
+    color: #2c7eaa;
+    position: absolute;
+    height: calc(100% - 5px); /* 90%; /* = 100% - 2*5% padding */
+    width: calc(100% - 5px); /*90%; /* = 100% - 2*5% padding */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cjs-dayHeader {
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+    background-color: #b8e6ff;
+    color: #2c7eaa;
+    text-align: center;
+  }
+  
+  .cjs-dayHeaderCell {
+    padding: 3px;
+    margin: 0;
+  }
+  
+  .cjs-dayTable {
+    display: table;
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+    margin: 5px;
+    padding: 0;
+  }
+  
+  .cjs-dayCell {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .cjs-blankday {
+    background-color: #9fddff;
+  }
+  
+  .cjs-lastLink {
+    float: left;
+    font-size: 0.8em;
+    margin: 0;
+    background: #9fddff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: #2c7eaa;
+    border: 1px solid #7fd2ff;
+    box-sizing: border-box;
+    font-weight: 600;
+  }
+  
+  .cjs-nextLink {
+    float: right;
+    font-size: 0.8em;
+    margin: 0;
+    background: #9fddff;
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: #2c7eaa;
+    border: 1px solid #7fd2ff;
+    box-sizing: border-box;
+    font-weight: 600;
+  }
+  
+  .cjs-clearfix {
+    clear: both;
+    margin: -2px 0;
+    padding: 1px;
+    height: 0;
+    width: 0;
+    border: 0;
+  }
+  
+  .cjs-moTitle {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .cjs-lastLink:hover,
+  .cjs-nextLink:hover {
+    cursor: pointer;
+    color: #212121;
+  }
+  
+  .cjs-calDay:hover {
+    background: #9fddff;
+    cursor: pointer;
+  }
+  
+  .cjs-active {
+    background: #7fd2ff;
+    border-color: #b8e6ff;
+  }
+  
+  .cjs-dateLabel {
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .cjs-otherEvents {
+    margin: 0;
+    padding: 0;
+    float: right;
+    font-size: 0.7em;
+    background: #7fd2ff;
+    border-radius: 99px;
+    padding: 1px 2px;
+    color: #212121;
+  }
+  
+  .cjs-calEvent {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 10px;
+    font-size: 0.7em;
+    background: rgba(0, 153, 153, 0.4);
+    border-radius: 3px;
+    padding: 1px 2px;
+    color: #212121;
+    text-align: center;
+    margin: initial;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  
+  .cjs-ellipse {
+    display: table;
+    table-layout: fixed;
+    width: 98%;
+    white-space: nowrap;
+  }
+  
+  .cjs-ellipse > * {
+    display: table-cell;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .cjs-weekRow {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: relative;
+  }
+  
+  :root {
+    --cal-light-color: rgb(255, 255, 255);
+    --cal-med-light-color: rgb(232, 240, 255);
+    --cal-med-dark-color: rgb(162, 162, 162);
+    --cal-dark-color: rgb(0, 0, 0);
+    --cal-black-color: rgba(33, 33, 33, 1);
+    --cal-evt-color: rgb(168, 178, 244);
+    --cal-active-color: rgb(255, 255, 255);
+    --cal-button-bg-color: rgb(168, 178, 244);
+  }
+  .cjs-dayCol {
+    background-color: var(--cal-light-color);
+  }
+  .cjs-dayHeader {
+    background-color: var(--cal-light-color);
+    color: var(--cal-dark-color);
+  }
+  .cjs-active {
+    background: var(--cal-active-color);
+    border-color: var(--cal-light-color);
+  }
+  .cjs-blankday {
+    background-color: var(--cal-med-light-color);
+  }
+  .cjs-lastLink {
+    background: var(--cal-button-bg-color);
+    color: var(--cal-dark-color);
+    border: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-nextLink {
+    background: var(--cal-button-bg-color);
+    color: var(--cal-dark-color);
+    border: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-calDay:hover {
+    background: var(--cal-med-light-color);
+  }
+  .cjs-right {
+    border-right: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-top {
+    border-top: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-left {
+    border-left: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-bottom {
+    border-bottom: 1px solid var(--cal-med-dark-color);
+  }
+  .cjs-otherEvents {
+    background: var(--cal-med-dark-color);
+    color: var(--cal-black-color);
+  }
+  .cjs-calHeader {
+    color: var(--cal-dark-color);
+  }
+  .cjs-dayContent {
+    color: var(--cal-dark-color);
+  }
+  .cjs-calEvent {
+    background: var(--cal-evt-color);
+    color: var(--cal-black-color);
+  }
+  

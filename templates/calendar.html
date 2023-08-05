@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+
+    <!-- Material icons  -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <title>Calendar</title>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+      <main style="width: 100%;">
+        <div class="topMenu" style="margin-bottom: 20px;">
+          <h2>Daily Medication</h2>
+          <h3 id="date-display"></h3>
+        </div>
+      <div id="calendar"></div>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/menuAndModal.js') }}"></script>
+
+
+    <script>
+      var div = document.getElementById("calendar");
+      all_trans = [];
+      Transaction.all.forEach((transaction, index) => {
+        let type = transaction.amount > 0 ? "income" : "expense";
+        all_trans.push({
+          desc:
+            transaction.description + " : " + type + " " + transaction.amount,
+          date: new Date(transaction.date),
+        });
+      });
+      console.log(all_trans);
+      var cal = new calendar(div, {
+        events: all_trans,
+        ellipse: false,
+      });
+    </script>
+  </body>
+</html>
