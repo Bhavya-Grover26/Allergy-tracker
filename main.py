@@ -11,6 +11,7 @@ from py_edamam import PyEdamam
 from collections import deque
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
+import csv
 
 
 import datetime
@@ -132,9 +133,6 @@ class SymptomLinkedList:
             yield current
             current = current.next
 
-
-
-
 @app.route('/index')
 def display_linked_list():
     linked_list = load_linked_list_from_file('linked_list_data.pickle')
@@ -172,56 +170,37 @@ def navbar():
     return render_template('dashboard.html')
 
 app.config ["SECRET_KEY"] = "56f7c18ca74b1712ba94242c40ccef435d1fa4ac"
-app.config["MONGO_URI"] = "mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/Allergy-tracker?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = "mongodb+srv://hackathon:digitaldreamers@digitaldreamers.mjk5qcg.mongodb.net/?retryWrites=true&w=majority"
+app.config["MONGO_DBNAME"] = "Allergy-tracker"
 
-mongo = PyMongo()
+# mongo = PyMongo()
 mongo = PyMongo(app)
 
-client = MongoClient('mongodb+srv://chinmayidotdesai:digitaldreamers@cluster0.j61lfnm.mongodb.net/?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://hackathon:digitaldreamers@digitaldreamers.mjk5qcg.mongodb.net/?retryWrites=true&w=majority')
 db = client["Allergy-tracker"]
-collection = db["Allergy-tracker"]
+collection = db["users"]
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    username = request.form.get('username')
-    email = request.form.get('email')
-    password = request.form.get('password')
-
-    user_data = {
-        'username': username,
-        'email': email,
-        'password': password
-    }
-
-    # Insert user data into MongoDB
-    collection = mongo.db.users
-    collection.insert_one(user_data)
-
-    return render_template('signup.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    
     if request.method == 'POST':
         username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
 
         user_data = {
             'username': username,
+            'email': email,
             'password': password
         }
 
-        # Check user credentials against MongoDB
-        collection = mongo.db.users
-        user = collection.find_one(user_data)
+    # Insert user data into MongoDB
+        collection.insert_one(user_data)
+        return render_template('login.html')
 
-        if user:
-            session['username'] = user['username']
-            return redirect(url_for('navbar'))  # Redirect to dashboard route
-        else:
-            error_message = "Invalid credentials. Please try again."
-            return render_template('login.html', error_message=error_message)
+    return render_template('signup.html')
 
+@app.route('/login')
+def login():
     return render_template('login.html')  # For GET requests
 
 
@@ -392,7 +371,7 @@ if __name__ == '__main__':
     mongo = PyMongo()
     mongo.init_app(app)
 
-    app.run()
+    app.run(debug = True)
 
 
 

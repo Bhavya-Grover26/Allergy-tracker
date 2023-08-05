@@ -26,7 +26,7 @@
         <div class="form-content">
           <div class="login-form">
             <div class="title">Login</div>
-          <form method="POST" action="/login" >
+          <form action="/login">
             <div class="input-boxes">
               <div class="input-box">
                 <i class="fas fa-envelope"></i>
@@ -37,12 +37,16 @@
                 <input type="password" placeholder="Enter your password" name = "password" required>
               </div>
               <div class="text"><a href="#">Forgot password?</a></div>
-              <div href="/" class="button input-box">
+              <div class="button input-box">
+                <a href="{{ url_for('navbar') }}">
                 <input type="submit" value="Sumbit" >
+              </a>
               </div>
-              <div class="text sign-up-text">Don't have an account? <label for="flip"><a href="{{ url_for('signup') }}">Sign Up</a></label></div>
-            </div>
-        </form>
+              <!-- <div class="text sign-up-text">Don't have an account? <label for="flip"><a href="{{ url_for('signup') }}">Sign Up</a></label></div> -->
+            <!-- </div> -->
+            <!-- <div href = "/signup" class="text sign-up-text">Don't have an account?<label for = "flip">Sign Up</label></div> -->
+            <div class="text sign-up-text">Don't have an account? <label for="flip"><a href="{{ url_for('signup') }}">SignUp Now</a></label></div>
+          </form>
       </div>
     </div>
     </div>
