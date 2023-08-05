@@ -1,0 +1,70 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  /* Header and Navigation Styles */
+  header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  /* Main Content Styles */
+  main {
+    padding: 2rem;
+  }
+  
+  .allergy-awareness {
+    text-align: left;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .allergy-awareness h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #007BFF;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 500px;
+  }
+  
+  .importance-content h2 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    color: #007BFF;
+}
+  
+.importance-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.importance-content h5{
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  color: #d92e2e;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}

@@ -229,6 +229,10 @@ def search():
 
     return render_template('recipes.html', ingredient=ingredient, hits=hits)
 
+@app.route('/awareness')
+def awareness():
+    return render_template('awareness.html')
+
 def edamam_search(query):
     # Access the Edamam App ID and App Key from the environment variables
     app_id = os.environ['EDAMAM_APP_ID']
@@ -290,10 +294,6 @@ def select_symptom():
 
     return render_template('symptom_checker.html', symptom_list=symptom_list, selected_foods=selected_foods)
 
-
-@app.route('/caldash.html')
-def caldash():
-    return render_template('caldash.html')
 
 if __name__ == '__main__':
     csv_file = 'FoodData.csv'
