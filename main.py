@@ -2,6 +2,7 @@ from __future__ import print_function
 import os
 import requests
 import pickle
+import csv
 import pandas as pd
 from flask import Flask, render_template, request , jsonify, session, redirect, url_for
 from jinja2 import Template
@@ -295,10 +296,82 @@ def select_symptom():
 def caldash():
     return render_template('caldash.html')
 
+import csv
+
+class DoctorNode:
+    def __init__(self, name, address, state, email):
+        self.name = name
+        self.address = address
+        self.state = state
+        self.email = email
+        self.next = None
+
+def read_csv_to_linked_list(file_path):
+    head = None
+    tail = None
+    
+    with open(file_path, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        
+        for row in reader:
+            name = row['Name']
+            address = row['Address']
+            state = row['State']
+            email = row['Email ID']
+            
+            new_node = DoctorNode(name, address, state, email)
+            
+            if head is None:
+                head = new_node
+                tail = new_node
+            else:
+                tail.next = new_node
+                tail = new_node
+                
+    return head
+
+def main():
+    file_path = 'doctors.csv'  # Replace with the actual path to your CSV file
+    head = read_csv_to_linked_list(file_path)
+    
+    current = head
+    while current is not None:
+        print("Name:", current.name)
+        print("Address:", current.address)
+        print("State:", current.state)
+        print("Email:", current.email)
+        print("--------------------")
+        current = current.next
+    
+file_path = 'Doctors.csv'  # Replace with the actual path to your CSV file
+head = read_csv_to_linked_list(file_path)
+
+@app.route('/doctor', methods=['GET', 'POST'])
+def doctor():
+    if request.method == 'POST':
+        state = request.form['state']
+        doctors = []
+        
+        current = head
+        while current is not None:
+            if current.state == state:
+                doctors.append(current)
+            current = current.next
+        
+        return render_template('doctor.html', doctors=doctors, state=state)
+    
+    return render_template('doctor.html', doctors=None, state=None)
+
+
+
 if __name__ == '__main__':
     csv_file = 'FoodData.csv'
     linked_list = read_csv_and_create_linked_list(csv_file)
     save_linked_list_to_file(linked_list, 'linked_list_data.pickle')
+
+
+# Now you can use the loaded_list as needed
+
 
     # Initialize MongoDB connection
     mongo = PyMongo()
