@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Search</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/doctor.css') }}">
+    <form method="POST">
+        <label for="state">Enter State:</label>
+        <input type="text" id="state" name="state" required>
+        <button type="submit">Search</button>
+    </form>
+    
+    {% if doctors %}
+    <h2>Doctors from {{ state }}:</h2>
+    <ul>
+        {% for doctor in doctors %}
+        <li>
+            <strong>Name:</strong> {{ doctor.name }}<br>
+            <strong>Address:</strong> {{ doctor.address }}<br>
+            <strong>Email:</strong> {{ doctor.email }}<br>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No doctors found from {{ state }}.</p>
+    {% endif %}
+</body>
+</html>
