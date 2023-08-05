@@ -5,12 +5,15 @@ import pandas as pd
 from flask import Flask, render_template, request , jsonify
 from jinja2 import Template
 from py_edamam import PyEdamam 
+from flask import Flask, render_template
+from pymongo import MongoClient
+
 
 app = Flask(__name__, static_folder='static')
 app.config["DEBUG"] = True
 
 os.environ['EDAMAM_APP_ID'] = '4ba2acf1'
-os.environ['EDAMAM_APP_KEY'] = '984e714dc4b8dee2ecf753e1b72dec20'
+os.environ['EDAMAM_APP_KEY'] = '345f58077c89160ac3c67e636bbda828'
 
 url = "https://api.humanapi.co/v1/human/medical/allergies"
 
@@ -23,7 +26,7 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
-data = pd.read_csv('C:/Bhavya/Projects/Allergy Tracker/FoodData.csv')
+data = pd.read_csv('C:/Allergy-tracker/FoodData.csv')
 
 # Define the Node class for the linked list
 class Node:
@@ -99,6 +102,14 @@ def navbar():
 def login():
     return render_template('login.html')
 
+@app.route('/tracker')
+def tracker():
+    return render_template('tracker.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 @app.route('/recipes')
 def search():
     ingredient = request.args.get('ingredient')
@@ -118,11 +129,14 @@ def edamam_search(query):
            f"&app_key={app_key}"
 
     response = requests.get(curl)
+    print(response)
+    app.logger.error(response)
+    recipes_with_allergies = []
     if response.status_code == 200:
         data = response.json()
         hits = data.get('hits', [])
         # Extract the list of ingredients for each recipe
-        recipes_with_allergies = []
+        
         linked_list = load_linked_list_from_file('linked_list_data.pickle')
         for hit in hits:
             recipe = hit.get('recipe', {})
