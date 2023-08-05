@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tracker.css') }}">
+    </head>
+    <body>
+            <div id="container">
+                <h1 id="title">Allergy Tracker</h1>
+                <!--<p id="description">Thank you for taking the time to help us serve you better</p>-->
+
+                <form id="survey-form" action= "#">
+                    <div class="form-group">
+                        <p class="questions">Symptoms</p> 
+                        <select id="dropdown">
+                            <option value="Daily">Daily</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Occasionally">Occasionally</option>
+                            <option value="Never">Never</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="name-label" for="name">Severity</label><br>
+                        <input id="name" type="text" name="name" placeholder="Enter severity if any" required><br>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <p class="questions">How long does it stay severe?</p> 
+                        <input type="number" name="num" min="1" max="20">
+                        <select id="dropdown">
+                            <option value="Minutes">Minutes</option>
+                            <option value="Hours">Hours</option>
+                            <option value="Days">Days</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="email-label" for="email">Duration</label><br>
+                        <input id="email" type="email" name="email" placeholder="Enter duration" required><br>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="number-label" for="number">Potential Triggers</label><br>
+                        <input id="number" type="number" name="number" placeholder="Enter your potential triggers" min="0" max="120"><br>
+                    </div>
+
+                    
+
+                    <!--<div class="form-group">
+                    <p class="questions">When do you usually drink coffee?</p>
+                        <input type="radio" id="Morning" name="drink_time" value="Morning">
+                        <label for="Morning">Morning</label><br>
+                        <input type="radio" id="Afternoon" name="drink_time" value="Afternoon">
+                        <label for="Afternoon">Afternoon</label><br>
+                        <input type="radio" id="Evening" name="drink_time" value="Evening">
+                        <label for="Evening">Evening</label>
+                    </div>    
+
+                    <div class="form-group">
+                        <p class="questions">What is the most important aspect of your coffee? (Check all that apply)</p>
+                        <input type="checkbox" id="aspect-1" name="aspect-1" value="Price">
+                        <label for="aspect-1">Price</label><br>
+                        <input type="checkbox" id="aspect-2" name="aspect-2" value="taste">
+                        <label for="aspect-2">Taste</label><br>
+                        <input type="checkbox" id="aspect-3" name="aspect-3" value="Aesthetics">
+                        <label for="aspect-3">Aesthetics</label><br>
+                        <input type="checkbox" id="aspect-4" name="aspect-4" value="Aesthetics">
+                        <label for="aspect-4"> Other</label>
+                    </div>-->
+                   
+                    <!--<div class="form-group">
+                        <p class="questions"><label for="comments">Any other comments or suggestions?</label></p>
+                        <textarea id="comments" name="comments" placeholder="Enter your comment here"></textarea>
+                    </div>    -->
+
+                    <div class="form-group">
+                        <button id="submit" type="submit">Submit</button>
+                    </div>    
+                </form>
+            </div>
+    </body>
+</html>
